@@ -18,6 +18,7 @@ public class GlobalExceptionHandler {
 		
 		errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
 		errorObject.setMessage(ex.getMessage());
+		errorObject.setDetails(request.getDescription(false));
 		errorObject.setTimeStamp(new Date());
 		
 		return new ResponseEntity<ErrorObject>(errorObject,
@@ -31,6 +32,7 @@ public class GlobalExceptionHandler {
 		
 		errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
 		errorObject.setMessage(ex.getMessage());
+		errorObject.setDetails(request.getDescription(false));
 		errorObject.setTimeStamp(new Date());
 		
 		return new ResponseEntity<ErrorObject>(errorObject,

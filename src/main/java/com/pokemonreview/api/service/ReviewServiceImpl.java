@@ -43,8 +43,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<ReviewDto> getReviewByPokemonId(int id) {
+		Pokemon pokemon = pokemonRepo.findById(id).orElseThrow(()->
+		new PokemonNotFoundException("pokemon not found at this idd"));
 		List<Review> reviews = reviewRepo.findByPokemonId(id);
-		
+		if(reviews.isEmpty()) {
+			throw new ReviewNotFoundException("the Pokemon doesn't have reviews");
+		}
 		return reviews.stream().map(review -> mapToDto(review)).
 				collect(Collectors.toList());
 	}
