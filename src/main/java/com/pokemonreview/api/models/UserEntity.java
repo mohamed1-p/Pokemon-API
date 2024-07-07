@@ -25,7 +25,6 @@ public class UserEntity {
 	private int id;
 	private String userName;
 	private String password;
-	
 	@ManyToMany
 	@JoinTable(name = "user_roles", joinColumns= @JoinColumn
 			  (name = "user_id",referencedColumnName = "id"),
