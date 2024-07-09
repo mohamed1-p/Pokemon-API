@@ -1,6 +1,7 @@
 package com.pokemonreview.api.security;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,13 +18,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 	
+	private CustomUserDetailService userDetailService;
+	
+	@Autowired
+	public SecurityConfig(CustomUserDetailService userDetailService) {
+		this.userDetailService = userDetailService;
+	}
+
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http)
 			throws Exception{
 		http
 		.csrf().disable()
 		.authorizeRequests((request)-> request.requestMatchers(HttpMethod.GET)
-		.permitAll()
+		.authenticated()
 		.anyRequest().authenticated())
 		.httpBasic();
 		return http.build();
