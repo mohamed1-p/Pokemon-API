@@ -14,7 +14,6 @@ public interface ReviewRepo extends JpaRepository<Review,Integer>{
 
 	List<Review> findByPokemonId(int Pokemonid);
 	
-	@Query("select * from review where review.pokemonId : PokemonId ")
 	//querynative
-	List<Review> getAllByPokemonId(int Pokemonid);
+	
 }
