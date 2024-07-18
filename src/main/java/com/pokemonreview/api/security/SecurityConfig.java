@@ -39,8 +39,8 @@ public class SecurityConfig {
 		//is a type of malicious exploit targeting web applications.
 		.csrf().disable()
 		.authorizeHttpRequests((request)-> request.requestMatchers(
-				HttpMethod.GET)
-		.authenticated()
+				"/api/auth/**")
+		.permitAll()
 		.anyRequest().authenticated())
 		.httpBasic();
 		return http.build();
