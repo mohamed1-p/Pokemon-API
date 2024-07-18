@@ -31,11 +31,15 @@ public class SecurityConfig {
 
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http)
+	 SecurityFilterChain filterChain(HttpSecurity http)
 			throws Exception{
 		http
+		//Cross-Site Request Forgery (CSRF), also known as one-click 
+		//attack or session riding,
+		//is a type of malicious exploit targeting web applications.
 		.csrf().disable()
-		.authorizeRequests((request)-> request.requestMatchers(HttpMethod.GET)
+		.authorizeHttpRequests((request)-> request.requestMatchers(
+				HttpMethod.GET)
 		.authenticated()
 		.anyRequest().authenticated())
 		.httpBasic();
